@@ -1,0 +1,40 @@
+variables:
+  CI_PROJECT_NAME: ov-johnson
+
+stages:
+  - merge_requests
+  - build
+  - deploy
+
+.build_template: &build
+  stage: build
+  only:
+  - tags
+  - master
+  script: 
+    - bash $HOME/scripts/ovrouting/build
+
+.deploy_template: &deploy
+  stage: deploy
+#  when: manual
+  only:
+  - tags
+  - master
+  script:
+    - bash $HOME/scripts/ovrouting/deploy
+
+.merge_requests_template: &merge_requests
+  stage: merge_requests
+  only:
+  - merge_requests
+  script: 
+    - bash $HOME/scripts/ovrouting/test_merge_request
+
+merge_request:
+  <<: *merge_requests
+
+build:
+  <<: *build
+
+deploy:
+  <<: *deploy

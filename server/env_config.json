@@ -1,0 +1,13 @@
+{
+    "APP_NAME": "OVJohnson",
+    "DEFAULT_CONNECTION": "mongodb://ovrouting:nDX$b$c4qpxhka01@10.0.19.109:27017/ov_apirouting?authSource=ov_apirouting",
+    "tokenAPI" : {
+        "method": "POST",
+        "url": "https://idu.eton.vn/connect/token/",
+        "ContentType": "application/x-www-form-urlencoded",
+        "grant_type": "password",
+        "client_id": "opsdashboard",
+        "client_secret": "nL956rChiDML",
+        "scope": "openid profile etoninfo etonopswebapp etonadminservice idmgr etonopsservice offline_access"
+    }
+}

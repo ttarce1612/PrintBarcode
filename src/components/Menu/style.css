@@ -1,0 +1,17 @@
+
+.app-menu-subnav-content {
+    /* display: none; */
+    position: absolute;
+    left: 0;
+    width: 100%;
+  }
+
+.app-menu-parent:hover .app-menu-subnav-content {
+    display: block;
+}
+
+.app-header-uinfo .app-menu-subnav-content{
+  width: 100%;
+}
+
+
