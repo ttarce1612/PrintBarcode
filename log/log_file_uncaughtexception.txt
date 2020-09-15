@@ -318,3 +318,27 @@ uncaughtException | Error: Redis connection to 127.0.0.1:6379 failed - connect E
 uncaughtException | Error: Redis connection to 127.0.0.1:6379 failed - connect ECONNREFUSED 127.0.0.1:6379 ==========> 2020-09-11 15:33
 uncaughtException | Error: Redis connection to 127.0.0.1:6379 failed - connect ECONNREFUSED 127.0.0.1:6379 ==========> 2020-09-11 15:33
 uncaughtException | Error: Redis connection to 127.0.0.1:6379 failed - connect ECONNREFUSED 127.0.0.1:6379 ==========> 2020-09-11 15:33
+uncaughtException | Error: Redis connection to 127.0.0.1:6379 failed - connect ECONNREFUSED 127.0.0.1:6379 ==========> 2020-09-14 9:28
+uncaughtException | Error: Redis connection to 127.0.0.1:6379 failed - connect ECONNREFUSED 127.0.0.1:6379 ==========> 2020-09-14 9:28
+uncaughtException | Error: Redis connection to 127.0.0.1:6379 failed - read ECONNRESET ==========> 2020-09-14 18:18
+uncaughtException | Error: Redis connection to 127.0.0.1:6379 failed - connect ECONNREFUSED 127.0.0.1:6379 ==========> 2020-09-14 18:18
+uncaughtException | ConnectionError: connect ETIMEDOUT 103.130.218.167:8000 ==========> 2020-09-15 14:30
+uncaughtException | ConnectionError: connect ETIMEDOUT 103.130.218.167:8000 ==========> 2020-09-15 14:30
+uncaughtException | ReferenceError: serialPrintSchema is not defined ==========> 2020-09-15 14:41
+uncaughtException | ReferenceError: serialPrintSchema is not defined ==========> 2020-09-15 14:43
+uncaughtException | ConnectionError: connect ETIMEDOUT 103.130.218.167:8000 ==========> 2020-09-15 14:53
+uncaughtException | ConnectionError: connect ETIMEDOUT 103.130.218.167:8000 ==========> 2020-09-15 14:53
+uncaughtException | ConnectionError: connect ETIMEDOUT 103.130.218.167:8000 ==========> 2020-09-15 14:57
+uncaughtException | ConnectionError: connect ETIMEDOUT 103.130.218.167:8000 ==========> 2020-09-15 15:4
+uncaughtException | ConnectionError: connect ETIMEDOUT 103.130.218.167:8000 ==========> 2020-09-15 15:10
+uncaughtException | ConnectionError: connect ETIMEDOUT 103.130.218.167:8000 ==========> 2020-09-15 15:12
+uncaughtException | ConnectionError: connect ETIMEDOUT 103.130.218.167:8000 ==========> 2020-09-15 15:24
+uncaughtException | ConnectionError: connect ETIMEDOUT 103.130.218.167:8000 ==========> 2020-09-15 15:26
+uncaughtException | ConnectionError: connect ETIMEDOUT 103.130.218.167:8000 ==========> 2020-09-15 15:27
+uncaughtException | ConnectionError: connect ETIMEDOUT 103.130.218.167:8000 ==========> 2020-09-15 15:27
+uncaughtException | ConnectionError: connect ETIMEDOUT 103.130.218.167:8000 ==========> 2020-09-15 15:28
+uncaughtException | ConnectionError: connect ETIMEDOUT 103.130.218.167:8000 ==========> 2020-09-15 15:29
+uncaughtException | ConnectionError: connect ETIMEDOUT 103.130.218.167:8000 ==========> 2020-09-15 15:31
+uncaughtException | ConnectionError: connect ETIMEDOUT 103.130.218.167:8000 ==========> 2020-09-15 15:35
+uncaughtException | ConnectionError: connect ETIMEDOUT 103.130.218.167:8000 ==========> 2020-09-15 15:37
+uncaughtException | ConnectionError: connect ETIMEDOUT 103.130.218.167:8000 ==========> 2020-09-15 15:39

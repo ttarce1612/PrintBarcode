@@ -28,5 +28,10 @@ module.exports = {
         isCheckAuthentication: true,
         onlyAdmin: true
     },
+    PrintBarcodeModule: {
+        module: require('./app/PrintBarcodeModule/routes'),
+        isCheckAuthentication: true,
+        onlyAdmin: true
+    },
     
 }

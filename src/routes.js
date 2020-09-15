@@ -83,7 +83,7 @@ export default class Routes extends React.Component {
                                 )
                         }
                 }
-                let redirect = <Redirect to="/printserial" />
+                let redirect = <Redirect to="/printbarcode" />
                 if (!window.localStorage.getItem("token")) {
                         redirect = <Redirect to="/login" />
                         

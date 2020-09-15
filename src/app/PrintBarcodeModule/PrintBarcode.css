@@ -1,0 +1,21 @@
+.App {
+  text-align: center;
+  background-color:rgb(39, 38, 38);
+  height: 100%;
+  color: whitesmoke;
+}
+.user-session {
+  padding-bottom: 10px;
+}
+.sku-search {
+  padding-top: 10px;
+  padding-left: 35px;
+}
+
+.user-interface {
+  margin-bottom: 10px;
+}
+.sku-list {
+  /* vertical-align: middle; */
+  padding-left: 2%;
+}

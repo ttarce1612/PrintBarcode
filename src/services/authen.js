@@ -40,7 +40,7 @@ module.exports = {
                         window.localStorage.setItem("user_id", user_info.Id);
                         window.localStorage.setItem("full_name", user_info.FullName);
                         window.localStorage.setItem("token", json_data.access_token);
-                        window.location.href = "/printserial";
+                        window.location.href = "/printbarcode";
                     }
                 } else {
                     toast.error("Invalid login name or password");

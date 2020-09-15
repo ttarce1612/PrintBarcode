@@ -9,6 +9,7 @@ let inboundController = require("./inbound/inboundController");
 let outboundController = require("./outbound/outboundController");
 let orderController = require("./orders/orderController");
 let serialPrintController = require("./serialPrint/serialPrintController")
+let barcodePrintController = require("./barcodePrint/barcodePrintController")
 
 const logger = require('./../lib/logger');
 let _authCookie = require("../lib/authCookie");
@@ -20,6 +21,11 @@ router.use(function (req, res, next) {
 
         res.header('Access-Control-Allow-Origin', '*');
         res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+
+        // Barcode Printer Controller
+        router.route("/barcodeprint/searchbysku").post(barcodePrintController.searchBySku);
+        router.route("/barcodeprint/search").post(serialPrintController.searchByClient);
+
 
         // Serial Printer Controller
         router.route("/serialprint/print").post(serialPrintController.createUniqueStringList);
