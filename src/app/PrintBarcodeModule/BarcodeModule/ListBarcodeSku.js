@@ -20,14 +20,15 @@ function ListBarcodeSku(props) {
     const [dataList, setDataList] = useState([])
 
     let columns = [
-        { title: 'STT', field: 'stt' , width: '10'},
-        { title: 'Client', field: 'client', width: '20'},
+        { title: 'STT', field: 'stt', width: '10' },
+        { title: 'Client', field: 'client', width: '20' },
         { title: 'SKU', field: 'SKU' },
         { title: 'Name', field: 'name' },
-        { title: 'Unit', field: 'unit' , width: '20'},
+        { title: 'Unit', field: 'unit', width: '20' },
         // { title: 'Quantity', field: 'qty', width: '20' },
         { title: 'Unit per case', field: 'unit_per_case' },
-        { title: 'Barcode', field: 'barcode' }
+        { title: 'Barcode', field: 'barcode' },
+        { title: 'Printed Time', field: 'printed_time' }
     ]
 
     const printBarcode = (rowData) => {
@@ -36,15 +37,19 @@ function ListBarcodeSku(props) {
             return;
         } else {
             let printData = doPrepareData(rowData);
-            console.log("printBarcode -> printData", printData)
-            PrintBarcode.PrintBarcode(printData)
-            // let _dataList = [...dataList]
-            // for (let i in _dataList) {
-            //     if (rowData.client == _dataList[i].client && rowData.sku == _dataList[i].sku) {
-            //         _dataList[i]["printed_time"] = moment(new Date()).tz("Asia/Ho_Chi_Minh").format("HH:mm DD/MM/YYYY");
-            //     }
-            // }
-            // setDataList(_dataList)
+            PrintBarcode.PrintBarcode(printData).then(resolve => {
+                toast.message("Printting")
+                let _dataList = [...dataList]
+                for (let i in _dataList) {
+                    if (rowData.barcode == _dataList[i].barcode && rowData.sku == _dataList[i].sku) {
+                        _dataList[i]["printed_time"] = moment(new Date()).tz("Asia/Ho_Chi_Minh").format("HH:mm DD/MM/YYYY");
+                    }
+                }
+                setDataList(_dataList)
+            }, reject => {
+                toast.error(reject.message)
+            })
+
         }
 
     }
@@ -64,12 +69,15 @@ function ListBarcodeSku(props) {
         let checked = checkSku(_sku)
         if (checked) {
             BarcodeService.SearchBySku({ sku: _sku }).then(result => {
+                if (result.list_sku.length === 0) {
+                    toast.warning("Not found SKU: " + _sku)
+                }
                 if (result.status) {
                     let _dataList = []
                     let list = result.list_sku
                     for (let i in list) {
                         let data = {
-                            stt: parseInt(i) +1,
+                            stt: parseInt(i) + 1,
                             SKU: list[i].SKU,
                             barcode: list[i].barcode,
                             client: list[i].client,
@@ -87,7 +95,7 @@ function ListBarcodeSku(props) {
             })
         }
     }
- 
+
     const checkSku = (sku) => {
         if (sku.length <= 0) {
             toast.warning("Pleas input value SKU")

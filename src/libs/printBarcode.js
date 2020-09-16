@@ -1,5 +1,5 @@
+
 const CryptoJS = require("crypto-js");
-const toast = require("./toast");
 
 function generateList(item) {
   let listPrint = []
@@ -29,7 +29,7 @@ function sendToSmartPrint(barcode) {
   }
   return new Promise(function (resolve, reject) {
     if (!data) {
-      resolve({ Status: false, message: "no data" });
+      resolve({ Status: false, message: "No data print" });
     }
     var ws = new WebSocket("ws://127.0.0.1:2377/");
     ws.onerror = function (err, err2) {
@@ -42,29 +42,29 @@ function sendToSmartPrint(barcode) {
       }
     };
     ws.onclose = function () {
-      resolve({ Status: false, message : "WS is closed" });
+      resolve({ Status: false, message: "WebSocket is closed" });
     }
     ws.onopen = function () {
       ws.send(
         CryptoJS.enc.Base64.stringify(CryptoJS.enc.Utf8.parse(JSON.stringify(data)))
       );
-      resolve({ Status: true, message : "Sent" });
+      resolve({ Status: true, message: "Sent" });
     }
   })
 
 }
-module.exports = {
-  PrintBarcode: async (req, res) => {
+const PrintBarcode = (req) => {
+  return new Promise((resolve, reject) => {
     if (req) {
       if (req.sku && req.quantity > 0) {
         for (let i = 0; i < req.quantity; i++) {
           (function (ind) {
             setTimeout(function () {
               sendToSmartPrint(req.barcode).then(result => {
-                if(result.Status) {
-                  toast.message("Printting")
+                if (result.Status) {
+                  resolve(result)
                 } else {
-                  toast.error(result.message)
+                  reject(result)
                 }
               })
             }, (1000 * ind));
@@ -72,5 +72,8 @@ module.exports = {
         }
       }
     }
-  }
+  })
+}
+module.exports = {
+  PrintBarcode
 }
