@@ -27,14 +27,11 @@ module.exports = {
     },
     searchBySku: function (req, res) {
         let data = req.body
-        list = []
         barcodePrintHandle.searchBySku(data).then((result) => {
             if(result){
-                list.push(result)
+                res.json({ status: true, list_sku: result })
             }
-            res.json({ status: true, list_sku: list })
         })
-
     },
     create: function (req, res) {
         inboundHandle.create(req.body)

@@ -20,12 +20,12 @@ function ListBarcodeSku(props) {
     const [dataList, setDataList] = useState([])
 
     let columns = [
-        { title: 'STT', field: 'stt' , width: '20'},
-        { title: 'Client', field: 'client', width: '25'},
+        { title: 'STT', field: 'stt' , width: '10'},
+        { title: 'Client', field: 'client', width: '20'},
         { title: 'SKU', field: 'SKU' },
         { title: 'Name', field: 'name' },
         { title: 'Unit', field: 'unit' , width: '20'},
-        { title: 'Quantity', field: 'qty', width: '20' },
+        // { title: 'Quantity', field: 'qty', width: '20' },
         { title: 'Unit per case', field: 'unit_per_case' },
         { title: 'Barcode', field: 'barcode' }
     ]
@@ -69,7 +69,7 @@ function ListBarcodeSku(props) {
                     let list = result.list_sku
                     for (let i in list) {
                         let data = {
-                            stt: i+1,
+                            stt: parseInt(i) +1,
                             SKU: list[i].SKU,
                             barcode: list[i].barcode,
                             client: list[i].client,

@@ -74,7 +74,7 @@ async function getOne(params) {
 
 async function searchBySku(data) {
     if (data) {
-        return await objectModel.findOne({ SKU: data["sku"] });
+        return await objectModel.find({ SKU: data["sku"] });
     }
 }
 

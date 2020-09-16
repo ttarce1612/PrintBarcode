@@ -1,4 +1,5 @@
 const CryptoJS = require("crypto-js");
+const toast = require("./toast");
 
 function generateList(item) {
   let listPrint = []
@@ -54,16 +55,17 @@ function sendToSmartPrint(barcode) {
 }
 module.exports = {
   PrintBarcode: async (req, res) => {
-    console.log("req", req)
     if (req) {
       if (req.sku && req.quantity > 0) {
-        console.log("req.quantity", req.quantity)
         for (let i = 0; i < req.quantity; i++) {
           (function (ind) {
             setTimeout(function () {
               sendToSmartPrint(req.barcode).then(result => {
-                console.log("res", result)
-                
+                if(result.Status) {
+                  toast.message("Printting")
+                } else {
+                  toast.error(result.message)
+                }
               })
             }, (1000 * ind));
           })(i);
