@@ -7,7 +7,6 @@ import React from 'react';
 import MTable from '../../../components/TableList';
 
 const outboundService = require('../../../services/outboundService');
-const dispatcher = require("../../../libs/dispatcher");
 
 export default function Onbounds() {
   const [state, setState] = React.useState({

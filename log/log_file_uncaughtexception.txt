@@ -342,3 +342,8 @@ uncaughtException | ConnectionError: connect ETIMEDOUT 103.130.218.167:8000 ====
 uncaughtException | ConnectionError: connect ETIMEDOUT 103.130.218.167:8000 ==========> 2020-09-15 15:35
 uncaughtException | ConnectionError: connect ETIMEDOUT 103.130.218.167:8000 ==========> 2020-09-15 15:37
 uncaughtException | ConnectionError: connect ETIMEDOUT 103.130.218.167:8000 ==========> 2020-09-15 15:39
+uncaughtException | Error: Redis connection to 127.0.0.1:6379 failed - connect ECONNREFUSED 127.0.0.1:6379 ==========> 2020-09-16 8:52
+uncaughtException | Error: Redis connection to 127.0.0.1:6379 failed - connect ECONNREFUSED 127.0.0.1:6379 ==========> 2020-09-16 8:52
+uncaughtException | Error: Redis connection to 127.0.0.1:6379 failed - connect ECONNREFUSED 127.0.0.1:6379 ==========> 2020-09-16 8:52
+uncaughtException | Error: Redis connection to 127.0.0.1:6379 failed - connect ECONNREFUSED 127.0.0.1:6379 ==========> 2020-09-16 8:52
+uncaughtException | Error: Redis connection to 127.0.0.1:6379 failed - connect ECONNREFUSED 127.0.0.1:6379 ==========> 2020-09-16 8:52

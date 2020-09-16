@@ -24,7 +24,7 @@ router.use(function (req, res, next) {
 
         // Barcode Printer Controller
         router.route("/barcodeprint/searchbysku").post(barcodePrintController.searchBySku);
-        router.route("/barcodeprint/search").post(serialPrintController.searchByClient);
+        router.route("/barcodeprint/updatebarcode").post(barcodePrintController.updateBarcode);
 
 
         // Serial Printer Controller

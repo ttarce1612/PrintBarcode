@@ -4,7 +4,7 @@
  * Modified date: 2019/02/03
  */
 const objectModel = require("../data/barcodeModel");
-
+const objectModelStore = require("../data/storeModel");
 const baseHandle = require('./baseHandle');
 
 async function createUniqueStringList(data) {
@@ -77,7 +77,32 @@ async function searchBySku(data) {
         return await objectModel.findOne({ SKU: data["sku"] });
     }
 }
+async function updateBarcodeForStore() {
+    let list_store = await objectModelStore.find({})
+    // console.log("updateBarcodeForStore -> list_store", list_store)
+    for (let i in list_store) {
+        let create_data = list_store[i]
+        let result = {
+            serialList: [],
+            sucess: 0,
+            failed: 0
+        }
+        if (create_data && create_data["id"]) {
+            let serialString = "S" + create_data["id"].slice(-10, create_data["id"].length).toUpperCase()
+            await objectModelStore.findOneAndUpdate({ _id: create_data["id"]}, { barcode: serialString }, (err, doc) => {
+                if (err) {
+                    result.failed++
+                } else {
+                    result.sucess++
+                }
+            });
+        }
+        
+        console.log("updateBarcodeForStore -> result", result)
+    }
+
+}
 
 module.exports = {
-    save, create, getList, getOne, createUniqueStringList, searchBySku
+    save, create, getList, getOne, createUniqueStringList, searchBySku, updateBarcodeForStore
 };

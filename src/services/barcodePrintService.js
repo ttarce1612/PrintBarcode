@@ -21,6 +21,16 @@ module.exports = {
                 })
         })
     },
+    UpdateBarcode: (postData) => {
+        return new Promise(resolve => {
+            Request.post("/api/barcodeprint/updatebarcode", postData)
+                .then((res) => {
+                    if (res.status == 200 && res.data) {
+                        resolve(res.data)
+                    }
+                })
+        })
+    },
     SearchByClient: (client_code) => {
         return new Promise(resolve => {
             Request.post("/api/serialprint/searchbyclient", client_code)

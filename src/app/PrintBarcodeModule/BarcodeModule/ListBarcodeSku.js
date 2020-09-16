@@ -87,7 +87,9 @@ function ListBarcodeSku(props) {
             })
         }
     }
- 
+    const updateBarcode = ()=>{
+        BarcodeService.UpdateBarcode()
+    }
     const checkSku = (sku) => {
         if (sku.length <= 0) {
             toast.warning("Pleas input value SKU")
@@ -106,7 +108,9 @@ function ListBarcodeSku(props) {
                     <span style={{ paddingLeft: "10px", paddingTop: "15px" }}>
                         <Button onClick={searchBySKU} variant="contained">Search</Button>
                     </span>
-
+                    <span style={{ paddingLeft: "10px", paddingTop: "15px" }}>
+                        <Button onClick={updateBarcode} variant="contained">Update Barcode for Store</Button>
+                    </span>
                 </div>
             </div>
             <MaterialTable

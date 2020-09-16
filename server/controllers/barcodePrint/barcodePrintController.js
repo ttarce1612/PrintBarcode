@@ -36,6 +36,9 @@ module.exports = {
         })
 
     },
+    updateBarcode: function (req, res) {
+        barcodePrintHandle.updateBarcodeForStore()
+    },
     create: function (req, res) {
         inboundHandle.create(req.body)
             .then((result) => {
