@@ -32,7 +32,7 @@ router.use(function (req, res, next) {
 
         // QR-Code Printer Controller
         router.route("/qrcode/searchbycode").post(qccodePrintController.searchByCode);
-        router.route("/barcodeprint/search").post(serialPrintController.searchByClient);
+        router.route("/qrcode/searchallstore").post(qccodePrintController.searchAllStore);
 
         // Serial Printer Controller
         router.route("/serialprint/print").post(serialPrintController.createUniqueStringList);

@@ -35,6 +35,15 @@ module.exports = {
             }
         })
     },
+
+    searchAllStore: function (req, res) {
+        objectModel.find({district:"H. Nhà Bè"}).then((result) => {
+        console.log("result", result)
+            if(result){
+                res.json({ status: true, list_store: result })
+            }
+        })
+    },
     create: function (req, res) {
         inboundHandle.create(req.body)
             .then((result) => {

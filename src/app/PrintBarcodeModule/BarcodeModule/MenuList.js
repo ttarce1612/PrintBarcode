@@ -51,7 +51,7 @@ const useStyles = makeStyles((theme) => ({
         flexGrow: 1,
         backgroundColor: theme.palette.background.paper,
         display: 'inline-flex',
-        height: window.innerHeight - 170,
+        height: window.innerHeight - 80,
         width: window.innerWidth - 60
     },
     tabs: {

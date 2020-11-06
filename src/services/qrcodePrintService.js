@@ -21,6 +21,16 @@ module.exports = {
                 })
         })
     },
+    SearchAllStore: (postData) => {
+        return new Promise(resolve => {
+            Request.post("/api/qrcode/searchallstore", postData)
+                .then((res) => {
+                    if (res.status == 200 && res.data) {
+                        resolve(res.data)
+                    }
+                })
+        })
+    },
     SearchByClient: (client_code) => {
         return new Promise(resolve => {
             Request.post("/api/serialprint/searchbyclient", client_code)

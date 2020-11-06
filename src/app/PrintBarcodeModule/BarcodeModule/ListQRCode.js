@@ -23,12 +23,12 @@ function ListBarcodeSku(props) {
         { title: 'STT', field: 'stt', width: '10' },
         { title: 'Code', field: 'code', width: '20' },
         { title: 'Name', field: 'name' },
-        { title: 'Type', field: 'type' },
-        { title: 'Region', field: 'region', width: '20' },
+        // { title: 'Type', field: 'type' },
+        // { title: 'Region', field: 'region', width: '20' },
         // { title: 'Quantity', field: 'qty', width: '20' },
-        { title: 'Full Adress', field: 'full_adress' },
-        { title: 'Barcode', field: 'barcode' },
-        { title: 'Printed Time', field: 'printed_time' }
+        { title: 'Full Adress', field: 'full_address' },
+        // { title: 'Barcode', field: 'barcode' },
+        // { title: 'Printed Time', field: 'printed_time' }
     ]
 
     const printQrcode = (rowData) => {
@@ -54,13 +54,46 @@ function ListBarcodeSku(props) {
         }
 
     }
+    const printAll = () => {
+        let dataPrint = [...dataList]
+        // for (let i = 0; i < dataPrint.length; i++) {
+           
+        //     let qrcode = {
+        //         code: dataPrint[i].code,
+        //         refcode: dataPrint[i].refcode,
+        //         name: dataPrint[i].name,
+        //         address: dataPrint[i].full_address
+        //     }
+        //     let jsoncode = JSON.stringify(qrcode)
+        //     dataPrint[i]['qrcode'] = jsoncode
+        // }
+        if (dataPrint && dataPrint.length > 0) {
+            PrintQrcode.PrintAllQrcode(dataPrint).then(resolve => {
+                console.log("printAll -> resolve", resolve)
+                toast.success("Printting")
+                // let _dataList = [...dataList]
+                // for (let i in _dataList) {
+                //     if (dataPrint.barcode == _dataList[i].barcode && dataPrint.sku == _dataList[i].sku) {
+                //         _dataList[i]["printed_time"] = moment(new Date()).tz("Asia/Ho_Chi_Minh").format("HH:mm DD/MM/YYYY");
+                //     }
+                // }
+                // setDataList(_dataList)
+            }, reject => {
+                toast.error(reject.message)
+            })
+        }
+
+
+
+
+    }
     const doPrepareData = (data) => {
         console.log("doPrepareData -> data", data)
         let barcode = {
             barcode: data['barcode'],
             type: data['type'],
             quantity: 1,
-            full_adress: data['full_adress'],
+            full_address: data['full_address'],
             user: window.localStorage.getItem("user_info"),
             user_id: window.localStorage.getItem("user_id"),
         }
@@ -70,8 +103,8 @@ function ListBarcodeSku(props) {
         let _sku = document.getElementById("outlined-search-code").value.trim()
         let checked = checkSku(_sku)
         if (checked) {
-            QrcodeService.SearchByCode({ code: _sku }).then(result => {
-            console.log("searchBySKU -> result", result)
+            QrcodeService.SearchByCode({ district: _sku }).then(result => {
+                console.log("searchBySKU -> result", result)
                 if (result.list_store.length === 0) {
                     toast.warning("Not found SKU: " + _sku)
                 }
@@ -85,10 +118,11 @@ function ListBarcodeSku(props) {
                             name: list[i].name,
                             type: list[i].type,
                             region: list[i].region,
-                            full_adress: list[i].full_address,
+                            full_address: list[i].full_address,
                             barcode: list[i].barcode,
                             unit_per_case: list[i].unit_per_case,
                             updated_date: list[i].updated_date,
+                            refcode: list[i].refcode
                         }
                         _dataList.push(data)
                     }
@@ -96,6 +130,31 @@ function ListBarcodeSku(props) {
                 }
             })
         }
+    }
+
+    const searchAllStore = () => {
+        QrcodeService.SearchAllStore({ code: "all" }).then(result => {
+            console.log("searchBySKU -> result", result)
+            if (result.status) {
+                let _dataList = []
+                let list = result.list_store
+                for (let i in list) {
+                    let data = {
+                        stt: parseInt(i) + 1,
+                        code: list[i].code,
+                        name: list[i].name,
+                        type: list[i].type,
+                        region: list[i].region,
+                        full_address: list[i].full_address,
+                        refcode: list[i].refcode,
+                        unit_per_case: list[i].unit_per_case,
+                        updated_date: list[i].updated_date,
+                    }
+                    _dataList.push(data)
+                }
+                setDataList(_dataList)
+            }
+        })
     }
 
     const checkSku = (sku) => {
@@ -114,9 +173,14 @@ function ListBarcodeSku(props) {
                         <TextField id="outlined-search-code" label="Search by Code" type="search" variant="outlined" />
                     </span>
                     <span style={{ paddingLeft: "10px", paddingTop: "15px" }}>
-                        <Button onClick={searchByCode} variant="contained">Search</Button>
+                        <Button onClick={searchByCode} variant="contained">Search by District</Button>
                     </span>
-
+                    {/* <span style={{ paddingLeft: "10px", paddingTop: "15px" }}>
+                        <Button onClick={searchAllStore} variant="contained">Search All</Button>
+                    </span> */}
+                    <span style={{ paddingLeft: "10px", paddingTop: "15px" }}>
+                        <Button onClick={printAll} variant="contained">Print All</Button>
+                    </span>
                 </div>
             </div>
             <MaterialTable
