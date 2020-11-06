@@ -4,6 +4,9 @@ import LoginSession from './BarcodeModule/LoginSession';
 import SearchSku from './BarcodeModule/SearchSku'
 import ListBarcode from './BarcodeModule/ListBarcodeSku'
 import './PrintBarcode.css'
+import MenuTab from './BarcodeModule/MenuTab'
+
+import MenuList from './BarcodeModule/MenuList'
 
 Barcode.propTypes = {
 
@@ -22,11 +25,14 @@ function Barcode(props) {
         <LoginSession />
       </div>
       <div className="title">
-        <h1 style={{ textAlign: "left", paddingLeft: "35px" }}>BARCODE PRINTING</h1>
+        <h1 style={{ textAlign: "left", paddingLeft: "35px" }}>BARCODE AND QR-CODE PRINTING</h1>
       </div>
-      <div className="sku-list">
+      <div>
+        <MenuList />
+      </div>
+      {/* <div className="sku-list">
         <ListBarcode />
-      </div>
+      </div> */}
     </div>
   );
 }

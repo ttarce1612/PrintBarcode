@@ -8,8 +8,8 @@ import Button from '@material-ui/core/Button';
 const toast = require("./../../../libs/toast");
 var moment = require("moment-timezone");
 
-const PrintBarcode = require('../../../libs/printBarcode')
-const BarcodeService = require("../../../services/barcodePrintService");
+const PrintQrcode = require('../../../libs/printQrcode')
+const QrcodeService = require("../../../services/qrcodePrintService");
 
 ListBarcodeSku.propTypes = {
 
@@ -21,23 +21,24 @@ function ListBarcodeSku(props) {
 
     let columns = [
         { title: 'STT', field: 'stt', width: '10' },
-        { title: 'Client', field: 'client', width: '20' },
-        { title: 'SKU', field: 'SKU' },
+        { title: 'Code', field: 'code', width: '20' },
         { title: 'Name', field: 'name' },
-        { title: 'Unit', field: 'unit', width: '20' },
+        { title: 'Type', field: 'type' },
+        { title: 'Region', field: 'region', width: '20' },
         // { title: 'Quantity', field: 'qty', width: '20' },
-        { title: 'Unit per case', field: 'unit_per_case' },
+        { title: 'Full Adress', field: 'full_adress' },
         { title: 'Barcode', field: 'barcode' },
         { title: 'Printed Time', field: 'printed_time' }
     ]
 
-    const printBarcode = (rowData) => {
+    const printQrcode = (rowData) => {
         if (rowData.length === 0) {
             toast.error("No data");
             return;
         } else {
             let printData = doPrepareData(rowData);
-            PrintBarcode.PrintBarcode(printData).then(resolve => {
+            console.log("printQrcode -> printData", printData)
+            PrintQrcode.PrintQrcode(printData).then(resolve => {
                 toast.message("Printting")
                 let _dataList = [...dataList]
                 for (let i in _dataList) {
@@ -54,37 +55,38 @@ function ListBarcodeSku(props) {
 
     }
     const doPrepareData = (data) => {
+        console.log("doPrepareData -> data", data)
         let barcode = {
             barcode: data['barcode'],
-            sku: data['SKU'],
+            type: data['type'],
             quantity: 1,
-            client: data['client'],
+            full_adress: data['full_adress'],
             user: window.localStorage.getItem("user_info"),
             user_id: window.localStorage.getItem("user_id"),
         }
         return barcode;
     }
-    const searchBySKU = () => {
-        let _sku = document.getElementById("outlined-search-sku").value.trim()
+    const searchByCode = () => {
+        let _sku = document.getElementById("outlined-search-code").value.trim()
         let checked = checkSku(_sku)
         if (checked) {
-            BarcodeService.SearchBySku({ sku: _sku }).then(result => {
-                if (result.list_sku.length === 0) {
+            QrcodeService.SearchByCode({ code: _sku }).then(result => {
+            console.log("searchBySKU -> result", result)
+                if (result.list_store.length === 0) {
                     toast.warning("Not found SKU: " + _sku)
                 }
                 if (result.status) {
                     let _dataList = []
-                    let list = result.list_sku
+                    let list = result.list_store
                     for (let i in list) {
                         let data = {
                             stt: parseInt(i) + 1,
-                            SKU: list[i].SKU,
-                            barcode: list[i].barcode,
-                            client: list[i].client,
-                            created_date: list[i].created_date,
+                            code: list[i].code,
                             name: list[i].name,
-                            qty: list[i].qty,
-                            unit: list[i].unit,
+                            type: list[i].type,
+                            region: list[i].region,
+                            full_adress: list[i].full_address,
+                            barcode: list[i].barcode,
                             unit_per_case: list[i].unit_per_case,
                             updated_date: list[i].updated_date,
                         }
@@ -109,23 +111,23 @@ function ListBarcodeSku(props) {
             <div id="search-button" style={{ display: "flex", paddingBottom: "10px" }}>
                 <div id="style" style={{ float: "left", verticalAlign: "middle" }}>
                     <span >
-                        <TextField id="outlined-search-sku" label="Search by SKU" type="search" variant="outlined" />
+                        <TextField id="outlined-search-code" label="Search by Code" type="search" variant="outlined" />
                     </span>
                     <span style={{ paddingLeft: "10px", paddingTop: "15px" }}>
-                        <Button onClick={searchBySKU} variant="contained">Search</Button>
+                        <Button onClick={searchByCode} variant="contained">Search</Button>
                     </span>
 
                 </div>
             </div>
             <MaterialTable
-                title="Barcode List"
+                title="Store List"
                 columns={columns}
                 data={dataList}
                 actions={[
                     {
                         icon: 'print',
                         tooltip: 'Print Barcode',
-                        onClick: (event, rowData) => { printBarcode(rowData) }
+                        onClick: (event, rowData) => { printQrcode(rowData) }
                     }
                 ]}
                 options={{

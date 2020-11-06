@@ -11,6 +11,9 @@ let orderController = require("./orders/orderController");
 let serialPrintController = require("./serialPrint/serialPrintController")
 let barcodePrintController = require("./barcodePrint/barcodePrintController")
 
+let qccodePrintController = require("./qrcodePrint/qrcodePrintController")
+
+
 const logger = require('./../lib/logger');
 let _authCookie = require("../lib/authCookie");
 
@@ -27,11 +30,15 @@ router.use(function (req, res, next) {
         router.route("/barcodeprint/search").post(serialPrintController.searchByClient);
 
 
+        // QR-Code Printer Controller
+        router.route("/qrcode/searchbycode").post(qccodePrintController.searchByCode);
+        router.route("/barcodeprint/search").post(serialPrintController.searchByClient);
+
         // Serial Printer Controller
         router.route("/serialprint/print").post(serialPrintController.createUniqueStringList);
         router.route("/serialprint/searchbyclient").post(serialPrintController.searchByClient);
         router.route("/serialprint/getlist").get(serialPrintController.getList);
-        router.route("/serialprint/getlast").get(serialPrintController.getLast);  
+        router.route("/serialprint/getlast").get(serialPrintController.getLast);
         //ORDERS
         router.route("/orders").get(orderController.getList);
         router.route("/order/update").post(orderController.updateOrder);
@@ -49,7 +56,7 @@ router.use(function (req, res, next) {
         router.route("/outbound/update").post(outboundController.updateOutbound);
 
         next();
-    } catch(err) {
+    } catch (err) {
         console.log(77777, err)
     }
 });
