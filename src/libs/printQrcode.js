@@ -29,10 +29,10 @@ function sendToSmartPrint(qrCode1, qrCode2, qrCode3, qrCode4) {
 
   let data = {
     label: "In QrCode.",
-    printer_name: "PrinterQrCode",
-    printer: "PrinterQrCode",
-    printerDefault: "PrinterQrCode",
-    template: "PrinterQrCode",
+    printer_name: "PrinterQrCode", // Printer SmartPrint
+    printer: "PrinterQrCode_Store", // Printer_Managerment
+    printerDefault: "PrinterQrCode_Store",
+    template: "PrinterQrCode", // Template
     data: { qr1: qrCode1, qr2: qrCode2, qr3: qrCode3, qr4: qrCode4 },
     url: ""
   }

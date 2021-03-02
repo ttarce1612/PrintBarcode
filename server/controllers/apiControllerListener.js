@@ -14,7 +14,7 @@ let barcodePrintController = require("./barcodePrint/barcodePrintController")
 let qccodePrintController = require("./qrcodePrint/qrcodePrintController")
 
 
-const logger = require('./../lib/logger');
+// const logger = require('./../lib/logger');
 let _authCookie = require("../lib/authCookie");
 
 router.use(function (req, res, next) {
@@ -33,6 +33,8 @@ router.use(function (req, res, next) {
         // QR-Code Printer Controller
         router.route("/qrcode/searchbycode").post(qccodePrintController.searchByCode);
         router.route("/qrcode/searchallstore").post(qccodePrintController.searchAllStore);
+        router.route("/qrcode/updateWeight").post(qccodePrintController.updateWeight);
+        
 
         // Serial Printer Controller
         router.route("/serialprint/print").post(serialPrintController.createUniqueStringList);
@@ -75,7 +77,7 @@ async function logging(req) {
         username: (req.headers.cookie) ? _authCookie.getTopSecret(req) : '',
         createdate: new Date()
     };
-    logger.insert(_data, APP_NAME.toLowerCase() + '_' + 'request');
+    // logger.insert(_data, APP_NAME.toLowerCase() + '_' + 'request');
 }
 
 module.exports = router;
